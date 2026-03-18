@@ -20,6 +20,10 @@ struct Niki
 
   forward_missing_to @http_client
 
+  def completions : Completion::Endpoint
+    Completion::Endpoint.new(self)
+  end
+
   def messages : Message::Endpoint
     Message::Endpoint.new(self)
   end

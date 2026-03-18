@@ -9,7 +9,7 @@
 client = Niki.new(api_key: "openai-api-key")
 ```
 
-1. Create message:
+1. Create a message (Uses the *Responses API*):
 
    ```crystal
    response = client.messages.create(
@@ -36,6 +36,53 @@ client = Niki.new(api_key: "openai-api-key")
          output.content.try &.each do |content|
            puts content.type
            puts content.text
+           # ...
+         end
+
+         # ...
+       end
+     end
+
+     # ...
+   end
+   ```
+
+1. Create a chat completion:
+
+   ```crystal
+   response = client.completions.create(
+     model: "gpt-5.4",
+     messages: [
+       {
+         role: Niki::Role::Developer,
+         content: "You are a helpful assistant."
+       },
+       {
+         role: Niki::Role::User,
+         content: "Hello!"
+       }
+     ]
+   )
+
+   if response.error
+     response.error.try do |error|
+       puts error.code
+       puts error.completion
+       # ...
+     end
+   else
+     response.data.try do |completion|
+       puts completion.id
+       puts completion.model
+
+       completion.choices.try &.each do |choice|
+         puts choice.finish_reason
+         puts choice.index
+
+         choice.message.try do |message|
+           puts message.content
+           puts message.refusal
+           puts message.role
            # ...
          end
 
