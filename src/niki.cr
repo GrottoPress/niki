@@ -24,6 +24,10 @@ struct Niki
     Completion::Endpoint.new(self)
   end
 
+  def conversations : Conversation::Endpoint
+    Conversation::Endpoint.new(self)
+  end
+
   def messages : Message::Endpoint
     Message::Endpoint.new(self)
   end
