@@ -94,7 +94,6 @@ client = Niki.new(api_key: "openai-api-key")
    end
    ```
 
-<!--
 1. List models:
 
    ```crystal
@@ -108,14 +107,13 @@ client = Niki.new(api_key: "openai-api-key")
      end
    else
      response.data.try &.each do |model|
-       puts model.created_at
-       puts model.display_name
        puts model.id
+       puts model.created
+       puts model.owned_by
        # ...
      end
    end
    ```
--->
 
 ## Documentation
 

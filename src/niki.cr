@@ -28,6 +28,10 @@ struct Niki
     Message::Endpoint.new(self)
   end
 
+  def models : Model::Endpoint
+    Model::Endpoint.new(self)
+  end
+
   private def set_headers(api_key)
     @http_client.before_request do |request|
       set_api_key(request.headers, api_key)
