@@ -3,7 +3,7 @@ struct Niki::Conversation::Item
 
   @[JSON::Field(ignore: true)]
   getter data : Conversation? do
-    return unless error.nil?
+    return if error || json_unmapped.empty?
     Conversation.from_json(json_unmapped.to_json)
   end
 end

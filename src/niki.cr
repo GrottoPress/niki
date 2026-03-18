@@ -1,5 +1,6 @@
 require "http/client"
 require "json"
+require "mime/multipart"
 
 require "./niki/version"
 require "./niki/endpoint"
@@ -28,6 +29,10 @@ struct Niki
     Conversation::Endpoint.new(self)
   end
 
+  def files : File::Endpoint
+    File::Endpoint.new(self)
+  end
+
   def messages : Message::Endpoint
     Message::Endpoint.new(self)
   end
@@ -49,7 +54,7 @@ struct Niki
   end
 
   private def set_content_type(headers)
-    headers["Content-Type"] = "application/json"
+    headers["Content-Type"] ||= "application/json"
   end
 
   private def set_user_agent(headers)

@@ -3,7 +3,7 @@ struct Niki::Completion::Item
 
   @[JSON::Field(ignore: true)]
   getter data : Completion? do
-    return unless error.nil?
+    return if error || json_unmapped.empty?
     Completion.from_json(json_unmapped.to_json)
   end
 end

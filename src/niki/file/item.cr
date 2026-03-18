@@ -1,9 +1,9 @@
-struct Niki::Usage::Item
+struct Niki::File::Item
   include Response
 
   @[JSON::Field(ignore: true)]
-  getter data : Usage? do
+  getter data : File? do
     return if error || json_unmapped.empty?
-    Usage.from_json(json_unmapped.to_json)
+    File.from_json(json_unmapped.to_json)
   end
 end

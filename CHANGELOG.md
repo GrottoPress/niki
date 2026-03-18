@@ -14,3 +14,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `Niki::Completion::Message::Endpoint`
 - Add `Niki::Model::Endpoint`
 - Add `Niki::Conversation::Endpoint`
+- Add `Niki::File::Endpoint`

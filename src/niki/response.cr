@@ -21,7 +21,8 @@ module Niki::Response
     getter version : String?
 
     def self.from_json(response : HTTP::Client::Response) : self
-      from_json(response.body).set_additional_properties(response)
+      body = response.body.empty? ? "{}" : response.body
+      from_json(body).set_additional_properties(response)
     end
 
     protected def set_additional_properties(response : HTTP::Client::Response)
