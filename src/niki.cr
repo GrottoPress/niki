@@ -29,6 +29,10 @@ struct Niki
     Conversation::Endpoint.new(self)
   end
 
+  def embeddings : Embedding::Endpoint
+    Embedding::Endpoint.new(self)
+  end
+
   def files : File::Endpoint
     File::Endpoint.new(self)
   end
