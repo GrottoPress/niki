@@ -149,11 +149,7 @@ class Niki::Tool
   def container : Container?
     @container.try do |container|
       next container if container.is_a?(Container)
-
-      @container = Container.from_json({
-        container_id: container,
-        type: :auto
-      }.to_json)
+      @container = Container.from_json({container_id: container}.to_json)
     end
   end
 
