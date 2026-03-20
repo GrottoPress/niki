@@ -72,7 +72,7 @@ describe Niki::Model::Endpoint do
       response = client.models.list
 
       response.rate_limit.try(&.reset_requests).should eq(reset_requests)
-      response.data.should be_a(Array(Niki::Model)?)
+      response.data.should be_a(Array(Niki::Model))
 
       response.data.try &.first?.try do |model|
         model.id.should eq(model_id)

@@ -77,7 +77,7 @@ describe Niki::File::Endpoint do
       response = client.files.list
 
       response.rate_limit.try(&.reset_requests).should eq(reset_requests)
-      response.data.should be_a(Array(Niki::File)?)
+      response.data.should be_a(Array(Niki::File))
 
       response.data.try &.first?.try do |file|
         file.id.should eq(file_id)
