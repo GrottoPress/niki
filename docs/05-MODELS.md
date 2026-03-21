@@ -2,7 +2,7 @@
 
 A model is represented as `Niki::Model`.
 
-See <https://platform.openai.com/docs/api-reference/models> for the raw JSON schema.
+See <https://developers.openai.com/api/reference/resources/models> for the raw JSON schema.
 
 ### Usage Examples
 

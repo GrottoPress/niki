@@ -2,7 +2,7 @@
 
 An embedding is represented as `Niki::Embedding`.
 
-See <https://platform.openai.com/docs/api-reference/embeddings> for the raw JSON schema.
+See <https://developers.openai.com/api/reference/resources/embeddings> for the raw JSON schema.
 
 ### Usage Examples
 
