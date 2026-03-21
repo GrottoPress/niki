@@ -36,7 +36,7 @@ describe Niki::Container::File::Endpoint do
       response = client.containers.files.fetch(container_id, file_id)
 
       response.rate_limit.try(&.reset_requests).should eq(reset_requests)
-      response.data.should be_a(Niki::File)
+      response.data.should be_a(Niki::Container::File)
 
       response.data.try do |file|
         file.id.should eq(file_id)
@@ -89,7 +89,7 @@ describe Niki::Container::File::Endpoint do
       response = client.containers.files.list(container_id)
 
       response.rate_limit.try(&.reset_requests).should eq(reset_requests)
-      response.data.should be_a(Array(Niki::File))
+      response.data.should be_a(Array(Niki::Container::File))
 
       response.data.try &.first?.try do |file|
         file.id.should eq(file_id)
@@ -138,7 +138,7 @@ describe Niki::Container::File::Endpoint do
       )
 
       response.rate_limit.try(&.reset_requests).should eq(reset_requests)
-      response.data.should be_a(Niki::File)
+      response.data.should be_a(Niki::Container::File)
 
       response.data.try do |file|
         file.id.should eq(file_id)
@@ -179,7 +179,7 @@ describe Niki::Container::File::Endpoint do
       response = client.containers.files.upload(container_id, tempfile.path)
 
       response.rate_limit.try(&.reset_requests).should eq(reset_requests)
-      response.data.should be_a(Niki::File)
+      response.data.should be_a(Niki::Container::File)
 
       response.data.try do |file|
         file.id.should eq(file_id)
@@ -219,7 +219,7 @@ describe Niki::Container::File::Endpoint do
       response = client.containers.files.delete(container_id, file_id)
 
       response.rate_limit.try(&.reset_requests).should eq(reset_requests)
-      response.data.should be_a(Niki::File)
+      response.data.should be_a(Niki::Container::File)
 
       response.data.try do |file|
         file.id.should eq(file_id)
