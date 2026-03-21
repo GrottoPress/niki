@@ -22,7 +22,7 @@ struct Niki::Container::File::Endpoint
     create(container_id, path, headers)
   end
 
-  def create(container_id : String, path, headers = nil) : Item
+  def create(container_id : String, path : Path | String, headers = nil) : Item
     file_metadata = HTTP::FormData::FileMetadata.new(Path[path].basename)
     file_type = MIME.from_filename?(path) || "application/octet-stream"
     file_headers = HTTP::Headers{"Content-Type" => file_type}
