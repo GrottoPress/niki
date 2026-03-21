@@ -18,7 +18,7 @@ struct Niki::Container::File::Endpoint
     List.from_json(response)
   end
 
-  def upload(container_id, path, headers = nil) : Item
+  def upload(container_id, path, headers = nil)
     create(container_id, path, headers)
   end
 
