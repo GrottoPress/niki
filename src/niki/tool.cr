@@ -100,7 +100,7 @@ class Niki::Tool
 
   @allowed_tools : Array(String) | AllowedTools | Nil
   @container : String | Container | Nil
-  @environment : Environment | Container | Nil
+  @environment : Environment | ShellEnvironment | Nil
   @filters : FileSearchFilter | FileSearchFilters | WebSearchFilters | Nil
   @require_approval : Approval | RequireApproval | Nil
   @tools : self | Array(self) | Nil
@@ -149,7 +149,7 @@ class Niki::Tool
   def container : Container?
     @container.try do |container|
       next container if container.is_a?(Container)
-      @container = Container.from_json({container_id: container}.to_json)
+      @container = Container.from_json({id: container}.to_json)
     end
   end
 
@@ -181,8 +181,8 @@ class Niki::Tool
     end
   end
 
-  def shell_environment : Container?
-    @environment.try &.as?(Container)
+  def shell_environment : ShellEnvironment?
+    @environment.try &.as?(ShellEnvironment)
   end
 
   def tools : Array(self)?
