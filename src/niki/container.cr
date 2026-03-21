@@ -1,6 +1,7 @@
 struct Niki::Container
   enum Type
     Auto
+    ContainerAuto
     Local
     ContainerReference
   end
