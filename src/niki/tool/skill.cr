@@ -1,4 +1,4 @@
-struct Niki::Skill
+struct Niki::Tool::Skill
   enum Type
     SkillReference
     Inline
@@ -8,8 +8,9 @@ struct Niki::Skill
 
   getter description : String?
   getter name : String?
+  getter path : String?
   getter skill_id : String?
-  getter source : Source?
+  getter source : Niki::Skill::Source?
   getter type : Type?
   getter version : String?
 end
