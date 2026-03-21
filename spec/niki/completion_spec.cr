@@ -71,7 +71,7 @@ describe Niki::Completion::Endpoint do
       response.data.try do |completion|
         completion.id.should eq(completion_id)
         completion.choices.try(&.first?).should be_a(Niki::Completion::Choice)
-        completion.usage.should be_a(Niki::Completion::Usage)
+        completion.usage.should be_a(Niki::Usage)
 
         completion.choices.try &.first?.try do |choice|
           choice.message.should be_a(Niki::Completion::Message)
