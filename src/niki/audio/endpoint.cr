@@ -16,6 +16,10 @@ struct Niki::Audio::Endpoint
     Translation::Endpoint.new(@client)
   end
 
+  def consents : Consent::Endpoint
+    Consent::Endpoint.new(@client)
+  end
+
   def voices : Voice::Endpoint
     Voice::Endpoint.new(@client)
   end
