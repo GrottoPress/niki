@@ -23,23 +23,7 @@ struct Niki::Container::File::Endpoint
   end
 
   def create(container_id : String, path : Path | String, headers = nil) : Item
-    file_metadata = HTTP::FormData::FileMetadata.new(Path[path].basename)
-    file_type = MIME.from_filename?(path) || "application/octet-stream"
-    file_headers = HTTP::Headers{"Content-Type" => file_type}
-
-    boundary = MIME::Multipart.generate_boundary
-    io = IO::Memory.new
-
-    headers ||= HTTP::Headers.new
-    headers["Content-Type"] = %(multipart/form-data; boundary="#{boundary}")
-
-    HTTP::FormData.build(io, boundary) do |form|
-      ::File.open(path) do |file|
-        form.file("file", file, file_metadata, file_headers)
-      end
-    end
-
-    response = @client.post(uri(container_id).path, headers, io.rewind)
+    response = upload(uri(container_id).path, "file", path, headers)
     Item.from_json(response)
   end
 
