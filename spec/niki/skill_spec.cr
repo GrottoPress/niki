@@ -133,6 +133,8 @@ describe Niki::Skill::Endpoint do
         skill.default_version.should eq("v1")
         skill.latest_version.should eq("v1")
       end
+
+      tempfile.delete
     end
   end
 

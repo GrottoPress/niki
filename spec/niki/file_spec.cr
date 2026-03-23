@@ -123,6 +123,8 @@ describe Niki::File::Endpoint do
         file.filename.should eq(file_name)
         file.purpose.should eq("batch")
       end
+
+      tempfile.delete
     end
   end
 

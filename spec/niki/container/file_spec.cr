@@ -185,6 +185,8 @@ describe Niki::Container::File::Endpoint do
         file.id.should eq(file_id)
         file.container_id.should eq(container_id)
       end
+
+      tempfile.delete
     end
   end
 

@@ -28,6 +28,8 @@ describe Niki::Audio::Translation::Endpoint do
       response.data.try do |translation|
         translation.text.should be_a(String)
       end
+
+      tempfile.delete
     end
   end
 end

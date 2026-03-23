@@ -40,6 +40,8 @@ describe Niki::Audio::Transcription::Endpoint do
         transcription.text.should be_a(String)
         transcription.usage.should be_a(Niki::Usage)
       end
+
+      tempfile.delete
     end
   end
 end

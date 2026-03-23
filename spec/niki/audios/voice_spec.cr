@@ -30,6 +30,8 @@ describe Niki::Audio::Voice::Endpoint do
       response.data.try do |voice|
         voice.id.should eq("id")
       end
+
+      tempfile.delete
     end
   end
 end

@@ -145,6 +145,8 @@ describe Niki::Skill::Version::Endpoint do
         version.version.should eq("v2")
         version.name.should eq("v2")
       end
+
+      tempfile.delete
     end
   end
 
