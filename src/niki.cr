@@ -21,6 +21,10 @@ struct Niki
 
   forward_missing_to @http_client
 
+  def audios : Audio::Endpoint
+    Audio::Endpoint.new(self)
+  end
+
   def completions : Completion::Endpoint
     Completion::Endpoint.new(self)
   end

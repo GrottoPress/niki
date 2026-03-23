@@ -18,3 +18,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `Niki::Embedding::Endpoint`
 - Add `Niki::Container::Endpoint`
 - Add `Niki::Skill::Endpoint`
+- Add `Niki::Audio::Endpoint`
