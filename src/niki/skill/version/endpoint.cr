@@ -38,7 +38,12 @@ struct Niki::Skill::Version::Endpoint
     content(skill_id, version, destination, headers)
   end
 
-  def content(skill_id : String, version : String, destination : IO, headers = nil) : Item
+  def content(
+    skill_id : String,
+    version : String,
+    destination : IO,
+    headers = nil
+  ) : Item
     path = "#{uri(skill_id).path}/#{version}/content"
 
     @client.get(path, headers) do |response|
