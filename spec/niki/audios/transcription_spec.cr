@@ -31,7 +31,7 @@ describe Niki::Audio::Transcription::Endpoint do
 
       response = client.audios.transcriptions.create(
         tempfile.path,
-        model: "gpt-4o-transcribe"
+        model: Niki::Model::GPT_4O_TRANSCRIBE
       )
 
       response.data.should be_a(Niki::Audio::Transcription)

@@ -10,7 +10,7 @@ See <https://developers.openai.com/api/reference/chat-completions/overview> for 
 
    ```crystal
    response = client.completions.create(
-     model: "gpt-5.4",
+     model: Niki::Model::GPT_5_4,
      messages: [
        {
          role: Niki::Role::Developer,

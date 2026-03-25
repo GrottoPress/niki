@@ -113,7 +113,7 @@ describe Niki::Video::Endpoint do
 
       response = client.videos.create(
         prompt: "A cool cat on a motorcycle",
-        model: "sora-2"
+        model: Niki::Model::SORA_2
       )
 
       response.data.should be_a(Niki::Video)

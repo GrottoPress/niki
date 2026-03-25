@@ -228,7 +228,7 @@ describe Niki::Message::Endpoint do
       client = Niki.new(api_key)
 
       response = client.messages.input_tokens(
-        model: "gpt-5",
+        model: Niki::Model::GPT_5,
         input: "Tell me a joke."
       )
 

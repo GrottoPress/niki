@@ -172,7 +172,7 @@ describe Niki::Completion::Endpoint do
 
       client = Niki.new(api_key)
       response = client.completions.create(
-        model: "gpt-4o-2024-08-06",
+        model: Niki::Model::GPT_4O_2024_08_06,
         messages: [{"role" => "user", "content" => "Hello"}]
       )
 

@@ -15,7 +15,7 @@ See <https://developers.openai.com/api/reference/resources/audio> for the raw JS
 
    response = client.audios.speeches.create(
      destination,
-     model: "gpt-4o-mini-tts",
+     model: Niki::Model::GPT_4O_MINI_TTS,
      input: "The quick brown fox jumped over the lazy dog.",
      voice: "alloy"
    )
@@ -36,7 +36,7 @@ See <https://developers.openai.com/api/reference/resources/audio> for the raw JS
    ```crystal
    response = client.audios.transcriptions.create(
      "/path/to/audio.mp3",
-     model: "gpt-4o-transcribe"
+     model: Niki::Model::GPT_4O_TRANSCRIBE
    )
 
    if response.error
@@ -60,7 +60,7 @@ See <https://developers.openai.com/api/reference/resources/audio> for the raw JS
    ```crystal
    response = client.audios.translations.create(
      "/path/to/audio.mp3",
-     model: "whisper-1"
+     model: Niki::Model::WHISPER_1
    )
 
    if response.error

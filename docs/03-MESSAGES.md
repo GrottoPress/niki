@@ -10,7 +10,7 @@ See <https://developers.openai.com/api/reference/responses/overview> for the raw
 
    ```crystal
    response = client.messages.create(
-     model: "gpt-5.4",
+     model: Niki::Model::GPT_5_4,
      input: "Tell me a three sentence bedtime story about a unicorn."
    )
 
@@ -103,7 +103,7 @@ See <https://developers.openai.com/api/reference/responses/overview> for the raw
 
    ```crystal
    response = client.messages.input_tokens(
-     model: "gpt-5",
+     model: Niki::Model::GPT_5,
      input: "Tell me a joke."
    )
 
@@ -155,7 +155,7 @@ See <https://developers.openai.com/api/reference/responses/overview> for the raw
 
    ```crystal
    response = client.messages.compact(
-     model: "gpt-5.1-codex-max",
+     model: Niki::Model::GPT_5_1_CODEX_MAX,
      input: [
        {
          role: Niki::Role::User,

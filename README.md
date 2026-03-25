@@ -13,7 +13,7 @@ client = Niki.new(api_key: "openai-api-key")
 
    ```crystal
    response = client.messages.create(
-     model: "gpt-5.4",
+     model: Niki::Model::GPT_5_4,
      input: "Tell me a three sentence bedtime story about a unicorn."
    )
 
@@ -51,7 +51,7 @@ client = Niki.new(api_key: "openai-api-key")
 
    ```crystal
    response = client.completions.create(
-     model: "gpt-5.4",
+     model: Niki::Model::GPT_5_4,
      messages: [
        {
          role: Niki::Role::Developer,

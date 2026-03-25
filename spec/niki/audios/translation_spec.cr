@@ -20,7 +20,7 @@ describe Niki::Audio::Translation::Endpoint do
       client = Niki.new(api_key)
       response = client.audios.translations.create(
         tempfile.path,
-        model: "whisper-1"
+        model: Niki::Model::WHISPER_1
       )
 
       response.data.should be_a(Niki::Audio::Translation)

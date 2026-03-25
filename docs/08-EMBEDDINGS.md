@@ -11,7 +11,7 @@ See <https://developers.openai.com/api/reference/resources/embeddings> for the r
    ```crystal
    response = client.embeddings.create(
      input: "The quick brown fox",
-     model: "text-embedding-3-small",
+     model: Niki::Model::TEXT_EMBEDDING_3_SMALL,
      encoding_format: "float"
    )
 
@@ -32,7 +32,7 @@ See <https://developers.openai.com/api/reference/resources/embeddings> for the r
    ```crystal
    response = client.embeddings.create(
      input: ["The quick brown fox", "jumped over the lazy dog"],
-     model: "text-embedding-3-small",
+     model: Niki::Model::TEXT_EMBEDDING_3_SMALL,
      encoding_format: "base64",
      dimensions: 256
    )
