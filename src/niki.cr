@@ -57,6 +57,10 @@ struct Niki
     Skill::Endpoint.new(self)
   end
 
+  def videos : Video::Endpoint
+    Video::Endpoint.new(self)
+  end
+
   private def set_headers(api_key)
     @http_client.before_request do |request|
       set_api_key(request.headers, api_key)
