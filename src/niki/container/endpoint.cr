@@ -35,6 +35,6 @@ struct Niki::Container::Endpoint
   end
 
   getter uri : URI do
-    URI.parse(@client.uri.to_s).tap { |uri| uri.path += "/containers" }
+    clone_uri(@client.uri).tap { |uri| uri.path += "/containers" }
   end
 end

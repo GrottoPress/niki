@@ -54,7 +54,7 @@ struct Niki::Skill::Version::Endpoint
   end
 
   def uri(skill_id : String) : URI
-    URI.parse(@client.skills.uri.to_s).tap do |uri|
+    clone_uri(@client.skills.uri).tap do |uri|
       uri.path += "/#{skill_id}/versions"
     end
   end

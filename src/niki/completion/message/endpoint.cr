@@ -12,7 +12,7 @@ struct Niki::Completion::Message::Endpoint
   end
 
   def uri(completion_id : String) : URI
-    URI.parse(@client.completions.uri.to_s).tap do |uri|
+    clone_uri(@client.completions.uri).tap do |uri|
       uri.path += "/#{completion_id}/messages"
     end
   end

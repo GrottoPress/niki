@@ -59,7 +59,7 @@ struct Niki::Container::File::Endpoint
   end
 
   def uri(container_id : String) : URI
-    URI.parse(@client.containers.uri.to_s).tap do |uri|
+    clone_uri(@client.containers.uri).tap do |uri|
       uri.path += "/#{container_id}/files"
     end
   end

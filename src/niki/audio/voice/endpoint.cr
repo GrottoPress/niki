@@ -10,8 +10,6 @@ struct Niki::Audio::Voice::Endpoint
   end
 
   getter uri : URI do
-    URI.parse(@client.uri.to_s).tap do |uri|
-      uri.path += "/audio/voices"
-    end
+    clone_uri(@client.uri).tap { |uri| uri.path += "/audio/voices" }
   end
 end

@@ -38,8 +38,6 @@ struct Niki::Audio::Consent::Endpoint
   end
 
   getter uri : URI do
-    URI.parse(@client.uri.to_s).tap do |uri|
-      uri.path += "/audio/voice_consents"
-    end
+    clone_uri(@client.uri).tap { |uri| uri.path += "/audio/voice_consents" }
   end
 end

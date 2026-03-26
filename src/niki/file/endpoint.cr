@@ -49,6 +49,6 @@ struct Niki::File::Endpoint
   end
 
   getter uri : URI do
-    URI.parse(@client.uri.to_s).tap { |uri| uri.path += "/files" }
+    clone_uri(@client.uri).tap { |uri| uri.path += "/files" }
   end
 end

@@ -2,6 +2,19 @@ module Niki::Endpoint
   macro included
     @client : Niki
 
+    private def clone_uri(uri)
+      URI.new(
+        uri.scheme,
+        uri.host,
+        uri.port,
+        uri.path,
+        uri.query,
+        uri.user,
+        uri.password,
+        uri.fragment
+      )
+    end
+
     private def upload(
       endpoint : String,
       field_name : String,

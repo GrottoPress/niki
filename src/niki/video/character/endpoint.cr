@@ -17,6 +17,6 @@ struct Niki::Video::Character::Endpoint
   end
 
   getter uri : URI do
-    URI.parse(@client.videos.uri.to_s).tap { |uri| uri.path += "/characters" }
+    clone_uri(@client.videos.uri).tap { |uri| uri.path += "/characters" }
   end
 end

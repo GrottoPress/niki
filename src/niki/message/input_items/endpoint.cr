@@ -12,7 +12,7 @@ struct Niki::Message::InputItem::Endpoint
   end
 
   def uri(response_id : String) : URI
-    URI.parse(@client.messages.uri.to_s).tap do |uri|
+    clone_uri(@client.messages.uri).tap do |uri|
       uri.path += "/#{response_id}/input_items"
     end
   end
