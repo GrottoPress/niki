@@ -46,14 +46,13 @@ struct Niki::Container::File::Endpoint
   def content(
     container_id : String,
     file_id : String,
-    destination : IO,
+    destination,
     headers = nil
   ) : Item
     path = "#{uri(container_id).path}/#{file_id}/content"
 
     @client.get(path, headers) do |response|
-      IO.copy(response.body_io, destination)
-      destination.rewind
+      copy_io(response.body_io, destination)
       Item.from_json(response)
     end
   end

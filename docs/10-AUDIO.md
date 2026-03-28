@@ -11,10 +11,8 @@ See <https://developers.openai.com/api/reference/resources/audio> for the raw JS
 1. Generate speech:
 
    ```crystal
-   destination = IO::Memory.new
-
    response = client.audios.speeches.create(
-     destination,
+     destination: "/home/user/Downloads/audio.mp3" # May be an `IO`
      model: Niki::Model::GPT_4O_MINI_TTS,
      input: "The quick brown fox jumped over the lazy dog.",
      voice: "alloy"
@@ -26,8 +24,6 @@ See <https://developers.openai.com/api/reference/resources/audio> for the raw JS
        puts error.message
        # ...
      end
-   else
-     File.write("/path/to/audio.mp3", destination)
    end
    ```
 

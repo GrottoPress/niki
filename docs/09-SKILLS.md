@@ -83,11 +83,10 @@ See <https://developers.openai.com/api/reference/resources/skills> for the raw J
 1. Download skill:
 
    ```crystal
-   destination = IO::Memory.new
-
-   response = client.skills.download("skill_abc123", destination)
-
-   puts destination.gets_to_end
+   client.skills.download(
+     "skill_abc123",
+     destination: "/home/user/Downloads/skill_abc123.zip" # May be an `IO`
+   )
    ```
 
 1. List skill versions:
@@ -150,9 +149,9 @@ See <https://developers.openai.com/api/reference/resources/skills> for the raw J
 1. Download skill version:
 
    ```crystal
-   destination = IO::Memory.new
-
-   response = client.skills.versions.download("skill_abc123", "v1", destination)
-
-   puts destination.gets_to_end
+   client.skills.versions.download(
+     "skill_abc123",
+     "v1",
+     destination: "/home/user/Downloads/skill_abc123.zip" # May be an `IO`
+   )
    ```

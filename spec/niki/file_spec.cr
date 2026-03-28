@@ -182,15 +182,19 @@ describe Niki::File::Endpoint do
           "x-ratelimit-reset-requests" => reset_requests
         })
 
-      destination = IO::Memory.new
+      destination = File.tempname("niki", "txt")
 
-      client = Niki.new(api_key)
-      response = client.files.download(file_id, destination)
+      begin
+        client = Niki.new(api_key)
+        response = client.files.download(file_id, destination)
 
-      destination.gets_to_end.should eq(file_content)
+        File.read(destination).should eq(body_io.to_s)
 
-      response.rate_limit.try(&.reset_requests).should eq(reset_requests)
-      response.data.should be_nil
+        response.rate_limit.try(&.reset_requests).should eq(reset_requests)
+        response.data.should be_nil
+      ensure
+        File.delete(destination)
+      end
     end
   end
 end

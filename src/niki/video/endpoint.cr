@@ -75,12 +75,11 @@ struct Niki::Video::Endpoint
     content(id, destination, headers, **params)
   end
 
-  def content(id : String, destination : IO, headers = nil, **params) : Item
+  def content(id : String, destination, headers = nil, **params) : Item
     path = "#{uri.path}/#{id}/content?#{URI::Params.encode(params)}"
 
     @client.get(path, headers) do |response|
-      IO.copy(response.body_io, destination)
-      destination.rewind
+      copy_io(response.body_io, destination)
       Item.from_json(response)
     end
   end

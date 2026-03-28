@@ -104,9 +104,10 @@ See <https://developers.openai.com/api/reference/resources/videos> for the raw J
 1. Download a video:
 
    ```crystal
-   destination = File.open("/path/to/video.mp4", "w")
-
-   response = client.videos.download("video_abc123", destination)
+   response = client.videos.download(
+     "video_abc123",
+     destination: "/home/user/Downloads/video_abc123.mp4" # May be an `IO`
+   )
 
    if response.error
      response.error.try do |error|

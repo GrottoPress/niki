@@ -41,14 +41,13 @@ struct Niki::Skill::Version::Endpoint
   def content(
     skill_id : String,
     version : String,
-    destination : IO,
+    destination,
     headers = nil
   ) : Item
     path = "#{uri(skill_id).path}/#{version}/content"
 
     @client.get(path, headers) do |response|
-      IO.copy(response.body_io, destination)
-      destination.rewind
+      copy_io(response.body_io, destination)
       Item.from_json(response)
     end
   end

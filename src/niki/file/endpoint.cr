@@ -38,12 +38,11 @@ struct Niki::File::Endpoint
     content(id, destination, headers)
   end
 
-  def content(id : String, destination : IO, headers = nil) : Item
+  def content(id : String, destination, headers = nil) : Item
     path = "#{uri.path}/#{id}/content"
 
     @client.get(path, headers) do |response|
-      IO.copy(response.body_io, destination)
-      destination.rewind
+      copy_io(response.body_io, destination)
       Item.from_json(response)
     end
   end

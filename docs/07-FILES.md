@@ -69,8 +69,10 @@ See <https://developers.openai.com/api/reference/resources/files> for the raw JS
 1. Download file:
 
    ```crystal
-   destination = IO::Memory.new
-   response = client.files.download("file-abc123", destination)
+   response = client.files.download(
+     "file-abc123",
+     destination: "/home/user/Downloads/backup.zip" # May be an `IO`
+   )
 
    if response.error
      response.error.try do |error|
@@ -78,7 +80,5 @@ See <https://developers.openai.com/api/reference/resources/files> for the raw JS
        puts error.message
        # ...
      end
-   else
-     puts destination.gets_to_end
    end
    ```

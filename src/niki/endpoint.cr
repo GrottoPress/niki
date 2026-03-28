@@ -15,6 +15,16 @@ module Niki::Endpoint
       )
     end
 
+    private def copy_io(source, destination) : Nil
+      case destination
+      when IO
+        IO.copy(source, destination)
+        destination.rewind
+      else
+        ::File.write(destination, source, mode: "wb")
+      end
+    end
+
     private def upload(
       endpoint : String,
       field_name : String,

@@ -138,13 +138,9 @@ See <https://developers.openai.com/api/reference/resources/containers> for the r
 1. Download container file content:
 
    ```crystal
-   destination = IO::Memory.new
-
    response = client.containers.files.content(
      "cntr_abc123",
      "cfile_xyz789",
-     destination
+     destination: "/home/user/Downloads/backup.zip" # May be an `IO`
    )
-
-   puts destination.gets_to_end
    ```
