@@ -97,26 +97,28 @@ describe Niki::Audio::Consent::Endpoint do
         .with(headers: {"Authorization" => "Bearer #{api_key}"})
         .to_return(body: body)
 
-      tempfile = File.tempfile("recording", ".wav")
+      source = File.tempfile("recording", ".wav")
 
-      client = Niki.new(api_key)
+      begin
+        client = Niki.new(api_key)
 
-      response = client.audios.consents.create(
-        tempfile.path,
-        name: "John Doe",
-        language: "en"
-      )
+        response = client.audios.consents.create(
+          source.path,
+          name: "John Doe",
+          language: "en"
+        )
 
-      response.object.should eq(object)
-      response.data.should be_a(Niki::Audio::Consent)
+        response.object.should eq(object)
+        response.data.should be_a(Niki::Audio::Consent)
 
-      response.data.try do |consent|
-        consent.id.should eq("id")
-        consent.name.should eq("John Doe")
-        consent.language.should eq("en")
+        response.data.try do |consent|
+          consent.id.should eq("id")
+          consent.name.should eq("John Doe")
+          consent.language.should eq("en")
+        end
+      ensure
+        source.delete
       end
-
-      tempfile.delete
     end
   end
 

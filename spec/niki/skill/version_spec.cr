@@ -133,20 +133,23 @@ describe Niki::Skill::Version::Endpoint do
 
       client = Niki.new(api_key)
 
-      tempfile = File.tempfile("niki", ".zip")
-      response = client.skills.versions.upload(skill_id, tempfile.path)
+      source = File.tempfile("niki", ".zip")
 
-      response.rate_limit.try(&.reset_requests).should eq(reset_requests)
-      response.data.should be_a(Niki::Skill::Version)
+      begin
+        response = client.skills.versions.upload(skill_id, source.path)
 
-      response.data.try do |version|
-        version.id.should eq(version_id)
-        version.skill_id.should eq(skill_id)
-        version.version.should eq("v2")
-        version.name.should eq("v2")
+        response.rate_limit.try(&.reset_requests).should eq(reset_requests)
+        response.data.should be_a(Niki::Skill::Version)
+
+        response.data.try do |version|
+          version.id.should eq(version_id)
+          version.skill_id.should eq(skill_id)
+          version.version.should eq("v2")
+          version.name.should eq("v2")
+        end
+      ensure
+        source.delete
       end
-
-      tempfile.delete
     end
   end
 

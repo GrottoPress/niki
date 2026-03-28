@@ -120,21 +120,24 @@ describe Niki::Skill::Endpoint do
 
       client = Niki.new(api_key)
 
-      tempfile = File.tempfile("niki", ".zip")
-      response = client.skills.upload(tempfile.path)
+      source = File.tempfile("niki", ".zip")
 
-      response.rate_limit.try(&.reset_requests).should eq(reset_requests)
-      response.data.should be_a(Niki::Skill)
+      begin
+        response = client.skills.upload(source.path)
 
-      response.data.try do |skill|
-        skill.id.should eq(skill_id)
-        skill.name.should eq("csv_insights")
-        skill.description.should eq("CSV insights helper")
-        skill.default_version.should eq("v1")
-        skill.latest_version.should eq("v1")
+        response.rate_limit.try(&.reset_requests).should eq(reset_requests)
+        response.data.should be_a(Niki::Skill)
+
+        response.data.try do |skill|
+          skill.id.should eq(skill_id)
+          skill.name.should eq("csv_insights")
+          skill.description.should eq("CSV insights helper")
+          skill.default_version.should eq("v1")
+          skill.latest_version.should eq("v1")
+        end
+      ensure
+        source.delete
       end
-
-      tempfile.delete
     end
   end
 

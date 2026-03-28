@@ -19,19 +19,21 @@ describe Niki::Audio::Voice::Endpoint do
         .with(headers: {"Authorization" => "Bearer #{api_key}"})
         .to_return(body: body)
 
-      tempfile = File.tempfile("sample", ".mp3")
+      source = File.tempfile("sample", ".mp3")
 
-      client = Niki.new(api_key)
-      response = client.audios.voices.create(tempfile.path)
+      begin
+        client = Niki.new(api_key)
+        response = client.audios.voices.create(source.path)
 
-      response.object.should eq(object)
-      response.data.should be_a(Niki::Audio::Voice)
+        response.object.should eq(object)
+        response.data.should be_a(Niki::Audio::Voice)
 
-      response.data.try do |voice|
-        voice.id.should eq("id")
+        response.data.try do |voice|
+          voice.id.should eq("id")
+        end
+      ensure
+        source.delete
       end
-
-      tempfile.delete
     end
   end
 end

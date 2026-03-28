@@ -15,21 +15,24 @@ describe Niki::Audio::Translation::Endpoint do
         .with(headers: {"Authorization" => "Bearer #{api_key}"})
         .to_return(body: body)
 
-      tempfile = File.tempfile("audio", ".mp3")
+      source = File.tempfile("audio", ".mp3")
 
-      client = Niki.new(api_key)
-      response = client.audios.translations.create(
-        tempfile.path,
-        model: Niki::Model::WHISPER_1
-      )
+      begin
+        client = Niki.new(api_key)
 
-      response.data.should be_a(Niki::Audio::Translation)
+        response = client.audios.translations.create(
+          source.path,
+          model: Niki::Model::WHISPER_1
+        )
 
-      response.data.try do |translation|
-        translation.text.should be_a(String)
+        response.data.should be_a(Niki::Audio::Translation)
+
+        response.data.try do |translation|
+          translation.text.should be_a(String)
+        end
+      ensure
+        source.delete
       end
-
-      tempfile.delete
     end
   end
 end

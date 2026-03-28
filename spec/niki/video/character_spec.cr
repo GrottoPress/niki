@@ -53,19 +53,21 @@ describe Niki::Video::Character::Endpoint do
         .with(headers: {"Authorization" => "Bearer #{api_key}"})
         .to_return(body: body)
 
-      tempfile = File.tempfile("character", ".mp4")
+      source = File.tempfile("character", ".mp4")
 
-      client = Niki.new(api_key)
-      response = client.videos.characters.create(tempfile.path, name: "Mossy")
+      begin
+        client = Niki.new(api_key)
+        response = client.videos.characters.create(source.path, name: "Mossy")
 
-      response.data.should be_a(Niki::Video::Character)
+        response.data.should be_a(Niki::Video::Character)
 
-      response.data.try do |character|
-        character.id.should eq(character_id)
-        character.name.should eq("Mossy")
+        response.data.try do |character|
+          character.id.should eq(character_id)
+          character.name.should eq("Mossy")
+        end
+      ensure
+        source.delete
       end
-
-      tempfile.delete
     end
   end
 end

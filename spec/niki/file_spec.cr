@@ -109,22 +109,24 @@ describe Niki::File::Endpoint do
           "x-ratelimit-reset-requests" => reset_requests
         })
 
-      tempfile = File.tempfile("niki", ".txt")
+      source = File.tempfile("niki", ".txt")
 
-      client = Niki.new(api_key)
-      response = client.files.upload(tempfile.path)
+      begin
+        client = Niki.new(api_key)
+        response = client.files.upload(source.path)
 
-      response.rate_limit.try(&.reset_requests).should eq(reset_requests)
-      response.data.should be_a(Niki::File)
+        response.rate_limit.try(&.reset_requests).should eq(reset_requests)
+        response.data.should be_a(Niki::File)
 
-      response.data.try do |file|
-        file.id.should eq(file_id)
-        file.bytes.should eq(1024)
-        file.filename.should eq(file_name)
-        file.purpose.should eq("batch")
+        response.data.try do |file|
+          file.id.should eq(file_id)
+          file.bytes.should eq(1024)
+          file.filename.should eq(file_name)
+          file.purpose.should eq("batch")
+        end
+      ensure
+        source.delete
       end
-
-      tempfile.delete
     end
   end
 
